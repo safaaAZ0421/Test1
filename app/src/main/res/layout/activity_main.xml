@@ -19,7 +19,7 @@
 
     <EditText
         android:id="@+id/usernameInput"
-        android:hint="Username"
+        android:hint="email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -47,8 +47,8 @@
 
     <Button
         android:id="@+id/createAccountButton"
-        android:text="CREATE AN ACCOUNT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"/>
+        android:layout_marginTop="32dp"
+        android:text="CREATE AN ACCOUNT" />
 </LinearLayout>
