@@ -4,11 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.example.test1.R
-import com.example.test1.SignupActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,7 +20,9 @@ class MainActivity : AppCompatActivity() {
         val password = findViewById<EditText>(R.id.passwordInput)
         val loginButton = findViewById<Button>(R.id.loginButton)
         val createAccountButton = findViewById<Button>(R.id.createAccountButton)
+        val forgotPasswordText = findViewById<TextView>(R.id.forgotPasswordText)
 
+        //  Bouton connexion
         loginButton.setOnClickListener {
             val user = email.text.toString()
             val pass = password.text.toString()
@@ -38,18 +36,35 @@ class MainActivity : AppCompatActivity() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this, "Connexion réussie", Toast.LENGTH_SHORT).show()
-                        // Redirection vers une autre activité
+                        // Redirection vers l'accueil
                         startActivity(Intent(this, HomeActivity::class.java))
-                        // finish()
                     } else {
                         Toast.makeText(this, "Erreur : ${task.exception?.message}", Toast.LENGTH_LONG).show()
                     }
                 }
         }
 
+        //  Bouton création de compte
         createAccountButton.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
-    } // Accolade fermante ajoutée ici
+
+        //  "Mot de passe oublié ?"
+        forgotPasswordText.setOnClickListener {
+            val userEmail = email.text.toString().trim()
+
+            if (userEmail.isNotEmpty()) {
+                auth.sendPasswordResetEmail(userEmail)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Email de réinitialisation envoyé à $userEmail", Toast.LENGTH_LONG).show()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Erreur : ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+            } else {
+                Toast.makeText(this, "Veuillez entrer votre email", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 }

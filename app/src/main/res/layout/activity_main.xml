@@ -33,13 +33,14 @@
 
     <Button
         android:id="@+id/loginButton"
-        android:text="LOGIN"
+        android:text="se connecter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"/>
 
     <TextView
-        android:text="Forgot password?"
+        android:id="@+id/forgotPasswordText"
+        android:text="Mot de passe oublié?"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#71797E"
