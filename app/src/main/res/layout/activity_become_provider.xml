@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <!-- Choix du service -->
+        <Spinner
+            android:id="@+id/serviceSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:minHeight="48dp" />
+
+        <!-- Formulaire spécifique à Restauration -->
+        <LinearLayout
+            android:id="@+id/restoLayout"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/restoNameInput"
+                android:hint="Nom du restaurant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/restoAdresseInput"
+                android:hint="Adresse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/restoTelInput"
+                android:hint="Téléphone"
+                android:inputType="phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Champs supplémentaires -->
+            <EditText
+                android:id="@+id/restoEmailInput"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/restoFacebookInput"
+                android:hint="Facebook URL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/restoInstagramInput"
+                android:hint="Instagram URL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/restoSiteWebInput"
+                android:hint="Site Web"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!--<EditText
+                android:id="@+id/restoImageUrlInput"
+                android:hint="Image URL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <EditText
+                android:id="@+id/restoLogoUrlInput"
+                android:hint="Logo URL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>-->
+
+
+
+            <!-- Horaires -->
+            <!-- Section Horaires -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jours d'ouverture :"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:id="@+id/checkboxLundi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lundi" />
+                <CheckBox
+                    android:id="@+id/checkboxMardi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mardi" />
+                <CheckBox
+                    android:id="@+id/checkboxMercredi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mercredi" />
+                <CheckBox
+                    android:id="@+id/checkboxJeudi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jeudi" />
+                <CheckBox
+                    android:id="@+id/checkboxVendredi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vendredi" />
+                <CheckBox
+                    android:id="@+id/checkboxSamedi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Samedi" />
+                <CheckBox
+                    android:id="@+id/checkboxDimanche"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dimanche" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/heureDebutInput"
+                android:hint="Heure d'ouverture (ex: 09:00)"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="time" />
+
+            <EditText
+                android:id="@+id/heureFinInput"
+                android:hint="Heure de fermeture (ex: 23:00)"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="time" />
+
+        </LinearLayout>
+
+        <!-- Bouton de validation -->
+        <Button
+            android:id="@+id/butSuivant"
+            android:text="Suivant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp" />
+    </LinearLayout>
+</ScrollView>
