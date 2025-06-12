@@ -4,10 +4,19 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
+
+            <!-- emulateur aya -->
         <DropdownSelection timestamp="2025-05-27T19:23:32.902114900Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\USER\.android\avd\Medium_Phone.avd" />
+            <!-- emulateur safaa -->
+        <DropdownSelection timestamp="2025-06-08T15:54:07.537097100Z">
+          <Target type="DEFAULT_BOOT">
+            <handle>
+              <DeviceId pluginId="PhysicalDevice" identifier="serial=RZ8R70YM35L" />
+              <!-- fin de merge -->
+
             </handle>
           </Target>
         </DropdownSelection>

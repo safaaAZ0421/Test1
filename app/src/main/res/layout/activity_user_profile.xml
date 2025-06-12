@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Layout principal de la page profil utilisateur -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Conteneur vertical de tous les éléments -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--  BOUTON : Affiche la section avec les informations de l'utilisateur -->
+        <Button
+            android:id="@+id/btnAfficherInfos"
+            android:text="Afficher mes informations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp" />
+
+        <!--  SECTION : Informations personnelles modifiables -->
+        <LinearLayout
+            android:id="@+id/layoutInfos"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <!-- ️ Champ : Nom -->
+            <EditText
+                android:id="@+id/nomInput"
+                android:hint="Nom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- ️ Champ : Prénom -->
+            <EditText
+                android:id="@+id/prenomInput"
+                android:hint="Prénom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- ️ Champ : Email -->
+            <EditText
+                android:id="@+id/emailInput"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- ️ Champ : Téléphone -->
+            <EditText
+                android:id="@+id/telephoneInput"
+                android:hint="Téléphone"
+                android:inputType="phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!--  Liste déroulante : Sexe (Homme / Femme) -->
+            <Spinner
+                android:id="@+id/sexeSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp" />
+
+            <!--  Champ : Nouveau mot de passe -->
+            <EditText
+                android:id="@+id/newPasswordInput"
+                android:hint="Nouveau mot de passe"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" />
+
+            <!--  BOUTON : Modifier le mot de passe -->
+            <Button
+                android:id="@+id/btnChangePassword"
+                android:text="Changer le mot de passe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" />
+
+            <!--  BOUTON : Enregistrer toutes les modifications -->
+            <Button
+                android:id="@+id/btnSave"
+                android:text="Enregistrer les modifications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" />
+        </LinearLayout>
+
+        <!--  BOUTON : Changer de langue -->
+        <Button
+            android:id="@+id/btnChangeLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Changer de langue"
+            android:layout_marginTop="16dp" />
+
+
+        <!--  BOUTON : Redirige vers l'activité pour devenir prestataire -->
+        <Button
+            android:id="@+id/btnDevenirPrestataire"
+            android:text="Devenir prestataire"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp" />
+
+        <!--  BOUTON : Déconnecte l'utilisateur -->
+        <Button
+            android:id="@+id/btnDeconnexion"
+            android:text="Se déconnecter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp" />
+
+    </LinearLayout>
+</ScrollView>

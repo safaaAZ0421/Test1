@@ -4,15 +4,17 @@ plugins {
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.compose) apply false
     id("com.google.gms.google-services") version "4.4.2" apply false
-    kotlin("jvm")
+      /*alias(libs.plugins.google.services) apply false
+    alias(libs.plugins.kotlin.kapt) apply false*/
 
+    //kotlin("jvm")
+
+  
 }
-/*dependencies {
-    implementation(kotlin("stdlib-jdk8"))
-}
-repositories {
-    mavenCentral()
-}
-kotlin {
-    jvmToolchain(8)
+/*allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
 }*/
+

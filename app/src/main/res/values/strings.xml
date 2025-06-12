@@ -1,6 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Test1</string>
 
-
-
+    <string name="btn_afficher_infos" translatable="false">Afficher mes informations</string>
+    <string name="btn_save" translatable="false">Enregistrer les modifications</string>
+    <string name="btn_devenir_prestataire" translatable="false">Devenir prestataire</string>
+    <string name="btn_deconnexion" translatable="false">Se déconnecter</string>
+    <string name="btn_changer_langue">Changer de langue</string>
+    <string name="hint_nom" translatable="false">Nom</string>
+    <string name="hint_prenom" translatable="false">Prénom</string>
+    <string name="hint_email" translatable="false">Email</string>
+    <string name="hint_telephone" translatable="false">Téléphone</string>
+    <string name="hint_nouveau_mot_de_passe" translatable="false">Nouveau mot de passe</string>
+    <string name="btn_changer_mdp" translatable="false">Changer le mot de passe</string>
 </resources>
+
