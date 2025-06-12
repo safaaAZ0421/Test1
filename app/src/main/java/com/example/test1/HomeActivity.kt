@@ -2,12 +2,18 @@ package com.example.test1
 
 import android.content.Intent
 import android.os.Bundle
+
+import android.widget.Button
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+
 import android.view.MenuItem
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+
 
 class HomeActivity : AppCompatActivity() {
 
@@ -16,6 +22,15 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+
+      /*santé
+        val btnSante = findViewById<Button>(R.id.btnSante)
+        btnSante.setOnClickListener {
+            val intent = Intent(this, CabinetListActivity::class.java)
+            startActivity(intent)
+        }
+      */
 
         // Vérifie si l'utilisateur est connecté
         if (auth.currentUser == null) {
@@ -26,6 +41,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         val profileIcon = findViewById<ImageView>(R.id.profileIcon)
+
         val welcomeText = findViewById<TextView>(R.id.welcomeText)
         val serviceGrid = findViewById<GridLayout>(R.id.serviceGrid)
         val userId = auth.currentUser?.uid ?: return
@@ -103,6 +119,8 @@ class HomeActivity : AppCompatActivity() {
                 when (service) {
                     //affichier la liste des services
                     //pour Restauration
+                    "santé" -> {
+                        startActivity(Intent(this, CabinetListActivity::class.java))
                     "Restauration" -> {
                         startActivity(Intent(this, RestaurantListActivity::class.java))
                     }
@@ -117,3 +135,4 @@ class HomeActivity : AppCompatActivity() {
 
     }
 }
+

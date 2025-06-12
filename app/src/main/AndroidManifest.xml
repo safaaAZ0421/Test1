@@ -16,9 +16,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.test1"
+
+        
+
         tools:targetApi="31">
 
         <!-- Activité de création de compte -->
+
         <activity android:name=".SignupActivity" />
 
         <!-- Activité de connexion -->
@@ -27,6 +31,12 @@
         <!-- Activité principale de l'application après connexion -->
         <activity android:name=".HomeActivity" />
 
+             <!-- activities santé -->
+        <activity android:name=".CabinetDetailsActivity" />
+        <activity android:name=".CabinetListActivity"/>
+
+  <!--  fin activities santé -->
+
         <!-- Activité de détails du restaurant (doit être déclarée pour fonctionner) -->
         <activity android:name=".RestaurantDetailActivity" />
 
@@ -34,6 +44,7 @@
         <activity android:name=".RestaurantListActivity" />
 
         <!-- Activité principale (écran de démarrage) -->
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

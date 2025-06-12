@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="btn_afficher_infos" translatable="false">Afficher mes informations</string>
     <string name="btn_save" translatable="false">Enregistrer les modifications</string>
     <string name="btn_devenir_prestataire" translatable="false">Devenir prestataire</string>
@@ -12,3 +13,4 @@
     <string name="hint_nouveau_mot_de_passe" translatable="false">Nouveau mot de passe</string>
     <string name="btn_changer_mdp" translatable="false">Changer le mot de passe</string>
 </resources>
+
