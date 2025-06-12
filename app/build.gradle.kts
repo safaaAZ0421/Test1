@@ -38,38 +38,46 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
+        viewBinding = true
         compose = true
     }
 }
 
 dependencies {
-        implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
-        implementation(libs.firebase.auth)
+    // Firebase BOM (Bill of Materials) - manages versions for you
+    implementation(platform(libs.firebase.bom))
 
-        // Firebase Auth
-        implementation("com.google.firebase:firebase-auth")
+    // Firebase dependencies (no versions needed when using BOM)
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.firestore.ktx)
 
-    implementation ("com.google.firebase:firebase-auth-ktx:version_latest")
-    implementation ("com.google.firebase:firebase-bom:version_latest")
-
-    implementation ("com.google.firebase:firebase-firestore-ktx:24.9.1")
-
-
+    // AndroidX Core
     implementation(libs.androidx.core.ktx)
-        implementation(libs.androidx.lifecycle.runtime.ktx)
-        implementation(libs.androidx.activity.compose)
-        implementation(platform(libs.androidx.compose.bom))
-        implementation(libs.androidx.ui)
-        implementation(libs.androidx.ui.graphics)
-        implementation(libs.androidx.ui.tooling.preview)
-        implementation(libs.androidx.material3)
-        implementation(libs.androidx.appcompat)
-        testImplementation(libs.junit)
-        androidTestImplementation(libs.androidx.junit)
-        androidTestImplementation(libs.androidx.espresso.core)
-        androidTestImplementation(platform(libs.androidx.compose.bom))
-        androidTestImplementation(libs.androidx.ui.test.junit4)
-        debugImplementation(libs.androidx.ui.tooling)
-        debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.androidx.appcompat)
 
+    // RecyclerView (critical for your error)
+    implementation(libs.androidx.recyclerview.v132)
+    //implementation(libs.androidx.recyclerview)
+    //xml dependecies
+    implementation (libs.androidx.constraintlayout)
+    // Lifecycle components
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    // Compose (only include if you're using Jetpack Compose)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.cardview)
+
+    // Testing
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
 }

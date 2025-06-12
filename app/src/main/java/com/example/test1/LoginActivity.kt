@@ -27,6 +27,19 @@ class LoginActivity : AppCompatActivity() {
             val email = emailEditText.text.toString().trim()//trim() éviter les espaces au début/fin
             val password = passwordEditText.text.toString().trim()//trim() éviter les espaces au début/fin
 
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val intent = Intent(this, HomeActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        Toast.makeText(this, "Échec de connexion", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+
+
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
