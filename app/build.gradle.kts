@@ -2,14 +2,14 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    //
     alias(libs.plugins.google.services)
 }
-
 
 android {
     namespace = "com.example.test1"
     compileSdk = 35
+    //compileSdk = 34
+
 
     defaultConfig {
         applicationId = "com.example.test1"
@@ -30,46 +30,73 @@ android {
             )
         }
     }
+
+    /*composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.4"  // Must match Compose version
+    }*/
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         compose = true
     }
 }
 
 dependencies {
-        implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
-        implementation(libs.firebase.auth)
+    // Firebase BOM (gère les versions automatiquement)
+    implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
 
-        // Firebase Auth
-        implementation("com.google.firebase:firebase-auth")
+    // Firebase Auth et Firestore
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
 
-    implementation ("com.google.firebase:firebase-auth-ktx:version_latest")
-    implementation ("com.google.firebase:firebase-bom:version_latest")
-
-    implementation ("com.google.firebase:firebase-firestore-ktx:24.9.1")
+    // firebase-storage
+    implementation ("com.google.firebase:firebase-storage-ktx:20.3.0")
 
 
+    // RecyclerView
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    /*implementation(libs.recyclerview)*/
+
+    // Glide pour charger les images du restaurant
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    //implementation(libs.glide)
+
+
+    // AndroidX de base
+    //implementation(libs.androidxCoreKtx)
     implementation(libs.androidx.core.ktx)
-        implementation(libs.androidx.lifecycle.runtime.ktx)
-        implementation(libs.androidx.activity.compose)
-        implementation(platform(libs.androidx.compose.bom))
-        implementation(libs.androidx.ui)
-        implementation(libs.androidx.ui.graphics)
-        implementation(libs.androidx.ui.tooling.preview)
-        implementation(libs.androidx.material3)
-        implementation(libs.androidx.appcompat)
-        testImplementation(libs.junit)
-        androidTestImplementation(libs.androidx.junit)
-        androidTestImplementation(libs.androidx.espresso.core)
-        androidTestImplementation(platform(libs.androidx.compose.bom))
-        androidTestImplementation(libs.androidx.ui.test.junit4)
-        debugImplementation(libs.androidx.ui.tooling)
-        debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.androidx.appcompat)
 
+    // CardView
+    implementation("androidx.cardview:cardview:1.0.0")
+    //implementation(libs.cardview)
+
+    // Lifecycle et Compose
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+
+
+    implementation ("com.google.android.material:material:1.11.0")
+
+    // Tests
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
 }

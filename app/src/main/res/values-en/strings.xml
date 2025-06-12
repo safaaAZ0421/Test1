@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="btn_afficher_infos">Show my information</string>
+    <string name="btn_save">Save changes</string>
+    <string name="btn_devenir_prestataire">Become a provider</string>
+    <string name="btn_deconnexion">Logout</string>
+    <string name="btn_changer_langue">Change language</string>
+    <string name="hint_nom">Last name</string>
+    <string name="hint_prenom">First name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_telephone">Phone</string>
+    <string name="hint_nouveau_mot_de_passe">New password</string>
+    <string name="btn_changer_mdp">Change password</string>
+</resources>
