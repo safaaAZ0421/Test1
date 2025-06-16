@@ -4,6 +4,9 @@
 
     <!-- Permission pour accéder à Internet (Firebase en a besoin) -->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Ajoutez aussi ces permissions si nécessaire -->
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <!--demander l'autorisation d'accéder aux fichiers de stockage externe -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -36,6 +39,22 @@
         <activity android:name=".CabinetListActivity"/>
 
   <!--  fin activities santé -->
+        <!--activities sport -->
+        <activity
+            android:name=".SportsActivity"
+            android:exported="false"
+            android:label="@string/sports_title"
+            android:theme="@style/Theme.test1" />
+
+       <activity
+            android:name=".ClubDetailsActivity"
+            android:exported="false"
+            android:label="@string/club_details_title"
+            android:theme="@style/Theme.test1"
+            android:parentActivityName=".SportsActivity" />
+
+
+        <!--fin activities sport -->
 
         <!-- Activité de détails du restaurant (doit être déclarée pour fonctionner) -->
         <activity android:name=".RestaurantDetailActivity" />

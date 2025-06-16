@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/textViewProgramName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="Programme Débutant" />
+
+        <TextView
+            android:id="@+id/textViewProgramDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            tools:text="Cours d'initiation au tennis pour débutants" />
+
+        <TextView
+            android:id="@+id/textViewProgramDuration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:drawableStart="@drawable/ic_schedule"
+            android:drawablePadding="4dp"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            tools:text="Durée: 1h30" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+

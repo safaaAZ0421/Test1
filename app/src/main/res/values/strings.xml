@@ -12,5 +12,29 @@
     <string name="hint_telephone" translatable="false">Téléphone</string>
     <string name="hint_nouveau_mot_de_passe" translatable="false">Nouveau mot de passe</string>
     <string name="btn_changer_mdp" translatable="false">Changer le mot de passe</string>
+    <!-- Titres des activités -->
+    <string name="sports_title" translatable="false">Clubs Sportifs</string>
+    <string name="club_details_title" translatable="false">Détails du Club</string>
+
+    <!-- Messages -->
+    <string name="no_clubs_available" translatable="false">Aucun club disponible</string>
+    <string name="loading" translatable="false">Chargement...</string>
+    <string name="error_loading_clubs" translatable="false">Erreur lors du chargement des clubs</string>
+    <string name="error_loading_club_details" translatable="false">Erreur lors du chargement des détails</string>
+
+    <!-- Boutons -->
+    <string name="join_club" translatable="false">Rejoindre le Club</string>
+    <string name="view_details" translatable="false">Voir les détails</string>
+
+    <!-- Labels -->
+    <string name="disciplines" translatable="false">Disciplines</string>
+    <string name="coaches" translatable="false">Entraîneurs</string>
+    <string name="programs" translatable="false">Programmes</string>
+    <string name="prices" translatable="false">Tarifs</string>
+    <string name="location" translatable="false">Localisation</string>
+    <string name="duration" translatable="false">Durée</string>
+    <string name="from_price" translatable="false">À partir de</string>
+    <string name="per_month" translatable="false">/mois</string>
+    <string name="price_on_request" translatable="false">Prix sur demande</string>
 </resources>
 

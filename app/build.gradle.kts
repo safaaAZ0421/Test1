@@ -51,7 +51,78 @@ android {
 }
 
 dependencies {
+    // Firebase BOM (gère les versions automatiquement pour toutes les bibliothèques Firebase)
+    implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
 
+    // Firebase Core (toujours recommandé)
+    implementation("com.google.firebase:firebase-analytics")
+
+    // Firebase Auth et Firestore (pour votre application)
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-storage-ktx")
+
+    // AndroidX Core et AppCompat
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+
+    // UI Components
+    implementation("com.google.android.material:material:1.11.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.cardview:cardview:1.0.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+
+    // Image Loading
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
+    // Lifecycle components
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    // Compose (si vous utilisez Jetpack Compose)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+
+    // Tests
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
+}
+/*dependencies {
+    //start sport
+    // Pour les images circulaires
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
+    // Pour le chargement d'images
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+
+    // Pour Material Design
+    implementation("com.google.android.material:material:1.9.0")
+
+    // Pour ViewPager2
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+
+    // Pour Firebase Firestore
+    implementation("com.google.firebase:firebase-firestore-ktx:24.7.1")
+
+    // Pour CardView
+    implementation("androidx.cardview:cardview:1.0.0")
+
+    // Pour RecyclerView
+    implementation("androidx.recyclerview:recyclerview:1.3.1")
+
+    // Pour ConstraintLayout
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    //fin sport
     //start santé
     // Firebase BOM (Bill of Materials) - manages versions for you
     implementation(platform(libs.firebase.bom))
@@ -115,7 +186,7 @@ dependencies {
   //cardview santé xml
     implementation(libs.androidx.cardview)
 
-  
+
 
 
 
@@ -133,5 +204,5 @@ dependencies {
 
 
 
-}
+}*/
 

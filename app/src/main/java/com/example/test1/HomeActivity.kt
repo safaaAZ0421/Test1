@@ -2,15 +2,12 @@ package com.example.test1
 
 import android.content.Intent
 import android.os.Bundle
-
 import android.widget.Button
+import android.widget.GridLayout
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-
-import android.view.MenuItem
-import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.PopupMenu
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -93,7 +90,7 @@ class HomeActivity : AppCompatActivity() {
 
         //  Affichage dynamique des services
         val services = listOf(
-            "Salle de sport",
+            "Sport",
             "Bibliothèque",
             "Ménage",
             "Santé",
@@ -118,9 +115,13 @@ class HomeActivity : AppCompatActivity() {
             btn.setOnClickListener {
                 when (service) {
                     //affichier la liste des services
+                    //pour sport
+                    "Sport" -> {
+                        startActivity(Intent(this, SportsActivity::class.java))}
+                    //pour santé
+                    "Santé" -> {
+                        startActivity(Intent(this, CabinetListActivity::class.java))}
                     //pour Restauration
-                    "santé" -> {
-                        startActivity(Intent(this, CabinetListActivity::class.java))
                     "Restauration" -> {
                         startActivity(Intent(this, RestaurantListActivity::class.java))
                     }

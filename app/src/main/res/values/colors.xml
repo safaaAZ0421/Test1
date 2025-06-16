@@ -7,4 +7,24 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- Primary brand color -->
+    <color name="primary_color">#2196F3</color>
+    <color name="primary_dark">#1976D2</color>
+    <color name="primary_light">#BBDEFB</color>
+
+    <!-- Accent color -->
+    <color name="accent_color">#FF5722</color>
+
+    <!-- Background colors -->
+    <color name="background_color">#F5F5F5</color>
+    <color name="surface_color">#FFFFFF</color>
+
+    <!-- Text colors -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+
+    <!-- Other colors -->
+    <color name="divider_color">#BDBDBD</color>
+    <color name="error_color">#F44336</color>
+    <color name="success_color">#4CAF50</color>
 </resources>
