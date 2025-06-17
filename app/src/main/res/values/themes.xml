@@ -1,9 +1,8 @@
- <resources xmlns:tools="http://schemas.android.com/tools">
-        <style name="Theme.test1" parent="Theme.AppCompat.Light.NoActionBar">
-            <item name="colorPrimary">@color/purple_500</item>
-            <item name="colorPrimaryDark">@color/purple_700</item>
-            <item name="colorAccent">@color/black</item>
-            <!-- Appliquer le style à tous les boutons   <item name="buttonStyle">@style/MyAppButton</item> -->
-
-        </style>
- </resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.test1" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Tes personnalisations ici -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryDark">@color/purple_700</item>
+        <item name="colorAccent">@color/teal_200</item>
+    </style>
+</resources>
