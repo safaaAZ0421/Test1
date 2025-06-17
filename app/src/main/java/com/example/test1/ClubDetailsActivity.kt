@@ -1,8 +1,8 @@
 package com.example.test1
 
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +23,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.firestore.FirebaseFirestore
 
+
 class ClubDetailsActivity : AppCompatActivity() {
 
     private lateinit var viewPagerPhotos: ViewPager2
@@ -35,21 +36,24 @@ class ClubDetailsActivity : AppCompatActivity() {
     private lateinit var recyclerViewPrices: RecyclerView
     private lateinit var buttonJoinClub: MaterialButton
 
+
     private lateinit var firestore: FirebaseFirestore
     private var clubId: String? = null
     private var currentClub: Club? = null
+    private var isUserMember: Boolean = false // Statut d'adhésion de l'utilisateur
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_club_details)
 
         clubId = intent.getStringExtra("club_id")
-
+        isUserMember = intent.getBooleanExtra("is_member", false) // Récupérer le statut d'adhésion
 
         initViews()
         setupToolbar()
         setupRecyclerViews()
         loadClubDetails()
+        updateUIBasedOnMembership()
     }
 
     private fun initViews() {
@@ -74,9 +78,7 @@ class ClubDetailsActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
-    }
-
-
+   }
 
 
     private fun setupRecyclerViews() {
@@ -94,7 +96,10 @@ class ClubDetailsActivity : AppCompatActivity() {
         }
     }
 
+
+
     private fun loadClubDetails() {
+
         clubId?.let { id ->
             firestore.collection("clubs").document(id)
                 .get()
@@ -109,8 +114,6 @@ class ClubDetailsActivity : AppCompatActivity() {
                 }
                 .addOnFailureListener { exception ->
                     showError("Erreur lors du chargement: ${exception.message}")
-                    Log.e("ClubDetailsActivity", "Erreur lors du chargement des information du club: ", exception)
-                    Toast.makeText(this, "Erreur lors du chargement des details: ${exception.message}", Toast.LENGTH_LONG).show()
                 }
         }
     }
@@ -139,6 +142,8 @@ class ClubDetailsActivity : AppCompatActivity() {
         }
     }
 
+
+
    private fun setupDisciplinesAdapter(disciplines: List<String>) {
         val adapter = DisciplineAdapter(disciplines)
         recyclerViewDisciplines.adapter = adapter
@@ -158,11 +163,41 @@ class ClubDetailsActivity : AppCompatActivity() {
         val adapter = PriceAdapter(prices)
         recyclerViewPrices.adapter = adapter
     }
+    private fun updateUIBasedOnMembership() {
+        if (isUserMember) {
+            buttonJoinClub.text = "Réserver un coach" // Ou autre texte pour les membres
+            // Activer d'autres fonctionnalités exclusives pour les membres
+        } else {
+            buttonJoinClub.text = "Devenir membre" // Texte pour les non-membres
+            // Désactiver les fonctionnalités exclusives pour les non-membres
+        }
+    }
 
     private fun handleJoinClub() {
-        // Cette méthode sera étendue pour gérer l'adhésion payante
-        Toast.makeText(this, "Fonctionnalité d'adhésion à venir", Toast.LENGTH_SHORT).show()
+        if (isUserMember) {
+            // L'utilisateur est membre, permettre la réservation
+            Toast.makeText(this, "Fonctionnalité de réservation de coach à venir", Toast.LENGTH_SHORT).show()
+        } else {
+            // L'utilisateur n'est pas membre, lancer l'activité d'adhésion
+            val intent = Intent(this, MembershipActivity::class.java)
+            startActivityForResult(intent, MEMBERSHIP_REQUEST_CODE)
+        }
     }
+    companion object {
+        private const val MEMBERSHIP_REQUEST_CODE = 1001
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == MEMBERSHIP_REQUEST_CODE && resultCode == RESULT_OK) {
+            // L'utilisateur est devenu membre, mettre à jour l'interface
+            isUserMember = true
+            updateUIBasedOnMembership()
+            Toast.makeText(this, "Bienvenue dans notre communauté de membres !", Toast.LENGTH_LONG).show()
+        }
+    }
+
 
     private fun showError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()

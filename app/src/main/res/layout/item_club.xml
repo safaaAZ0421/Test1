@@ -80,7 +80,25 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageViewClub"
-            tools:text="À partir de 25€/mois" />
+            tools:text="À partir de 250Dh/mois" />
+
+        <!-- Badge pour les membres -->
+        <TextView
+            android:id="@+id/textViewMemberBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_member_badge"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
+            android:text="MEMBRE"
+            android:textColor="@android:color/white"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@+id/textViewPrice"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewClub" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

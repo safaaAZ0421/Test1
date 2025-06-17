@@ -53,6 +53,13 @@
             android:theme="@style/Theme.test1"
             android:parentActivityName=".SportsActivity" />
 
+        <activity
+            android:name=".MembershipActivity"
+            android:exported="false"
+            android:label="Adhésion Premium"
+            android:theme="@style/Theme.test1"
+            android:parentActivityName=".ClubDetailsActivity" />
+
 
         <!--fin activities sport -->
 

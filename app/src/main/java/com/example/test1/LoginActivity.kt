@@ -7,10 +7,19 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+
+    private var authListener: AuthListener? = null
+
+    interface AuthListener {
+        fun onAuthSuccess(user: FirebaseUser)
+        fun onAuthError(error: String)
+        fun showLoading(show: Boolean)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

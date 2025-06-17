@@ -12,7 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.test1.adapter.ClubAdapter
 import com.example.test1.model.Club
+import com.example.test1.model.User
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+
+
 
 class SportsActivity : AppCompatActivity() {
 
@@ -21,6 +25,9 @@ class SportsActivity : AppCompatActivity() {
     private lateinit var textViewEmpty: TextView
     private lateinit var clubAdapter: ClubAdapter
     private lateinit var firestore: FirebaseFirestore
+    private lateinit var auth: FirebaseAuth
+
+    private var isUserMember: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +35,8 @@ class SportsActivity : AppCompatActivity() {
 
         initViews()
         setupRecyclerView()
-        loadClubs()
+        //loadClubs()
+        checkMembershipAndLoadClubs()
     }
 
     private fun initViews() {
@@ -36,10 +44,11 @@ class SportsActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
         textViewEmpty = findViewById(R.id.textViewEmpty)
         firestore = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
     }
 
     private fun setupRecyclerView() {
-        clubAdapter = ClubAdapter(emptyList()) { club ->
+        clubAdapter = ClubAdapter(emptyList(), isUserMember) { club ->
             openClubDetails(club)
         }
 
@@ -49,6 +58,27 @@ class SportsActivity : AppCompatActivity() {
         }
     }
 
+
+    private fun checkMembershipAndLoadClubs() {
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            firestore.collection("users").document(currentUser.uid)
+                .get()
+                .addOnSuccessListener { document ->
+                    val user = document.toObject(User::class.java)
+                    isUserMember = user?.isMember ?: false
+                    loadClubs()
+                }
+                .addOnFailureListener { exception ->
+                    Toast.makeText(this, "Erreur de chargement du statut d'adhésion: ${exception.message}", Toast.LENGTH_LONG).show()
+                    isUserMember = false // Par défaut, non membre en cas d'erreur
+                    loadClubs()
+                }
+        } else {
+            isUserMember = false // Utilisateur non connecté, donc non membre
+            loadClubs()
+        }
+    }
     private fun loadClubs() {
         showLoading(true)
 
@@ -69,7 +99,11 @@ class SportsActivity : AppCompatActivity() {
                     showEmptyState(true)
                 } else {
                     showEmptyState(false)
-                    clubAdapter.updateClubs(clubs)
+                    // Recréer l'adaptateur avec le statut d'adhésion mis à jour
+                    clubAdapter = ClubAdapter(clubs, isUserMember) { club ->
+                        openClubDetails(club)
+                    }
+                    recyclerViewClubs.adapter = clubAdapter
                 }
             }
             .addOnFailureListener { exception ->
@@ -78,18 +112,12 @@ class SportsActivity : AppCompatActivity() {
                 Log.e("SportsActivity", "Erreur lors du chargement des clubs: ", exception)
                 Toast.makeText(this, "Erreur lors du chargement des clubs: ${exception.message}", Toast.LENGTH_LONG).show()
             }
-
-            /*.addOnFailureListener { exception ->
-                showLoading(false)
-                showEmptyState(true)
-                // Vous pouvez ajouter ici une gestion d'erreur plus sophistiquée
-                // comme afficher un Toast ou un Snackbar
-            }*/
     }
 
     private fun openClubDetails(club: Club) {
         val intent = Intent(this, ClubDetailsActivity::class.java)
         intent.putExtra("club_id", club.id)
+        intent.putExtra("is_member", isUserMember) // Passer le statut d'adhésion
         startActivity(intent)
     }
 
@@ -103,4 +131,3 @@ class SportsActivity : AppCompatActivity() {
         recyclerViewClubs.visibility = if (show) View.GONE else View.VISIBLE
     }
 }
-

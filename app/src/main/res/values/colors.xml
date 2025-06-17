@@ -23,8 +23,12 @@
     <color name="text_primary">#212121</color>
     <color name="text_secondary">#757575</color>
 
+    <!-- Couleurs pour la navigation -->
+    <color name="bottom_nav_color">@color/primary_color</color>
+
     <!-- Other colors -->
     <color name="divider_color">#BDBDBD</color>
     <color name="error_color">#F44336</color>
+    <!-- Couleur pour le badge de succès -->
     <color name="success_color">#4CAF50</color>
 </resources>

@@ -11,8 +11,11 @@ import com.bumptech.glide.Glide
 import com.example.test1.R
 import com.example.test1.model.Club
 
+
+
 class ClubAdapter(
     private var clubs: List<Club>,
+    private val isUserMember: Boolean = false, // Nouveau paramètre pour le statut d'adhésion
     private val onClubClick: (Club) -> Unit
 ) : RecyclerView.Adapter<ClubAdapter.ClubViewHolder>() {
 
@@ -22,6 +25,7 @@ class ClubAdapter(
         val textViewLocation: TextView = itemView.findViewById(R.id.textViewLocation)
         val textViewDisciplines: TextView = itemView.findViewById(R.id.textViewDisciplines)
         val textViewPrice: TextView = itemView.findViewById(R.id.textViewPrice)
+        val textViewMemberBadge: TextView = itemView.findViewById(R.id.textViewMemberBadge)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClubViewHolder {
@@ -40,11 +44,12 @@ class ClubAdapter(
         // Afficher le prix minimum
         val minPrice = club.prices.values.minOrNull()
         holder.textViewPrice.text = if (minPrice != null) {
-            "À partir de ${minPrice.toInt()}€/mois"
+            "À partir de ${minPrice.toInt()}Dh/mois"
         } else {
             "Prix sur demande"
         }
-
+        // Afficher le badge membre si l'utilisateur est membre
+        holder.textViewMemberBadge.visibility = if (isUserMember) View.VISIBLE else View.GONE
         // Charger l'image du club
         if (club.photos.isNotEmpty()) {
             Glide.with(holder.itemView.context)
@@ -61,7 +66,6 @@ class ClubAdapter(
             onClubClick(club)
         }
     }
-
     override fun getItemCount(): Int = clubs.size
 
     fun updateClubs(newClubs: List<Club>) {

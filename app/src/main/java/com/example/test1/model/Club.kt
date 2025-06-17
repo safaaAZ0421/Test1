@@ -12,6 +12,16 @@ data class Club(
     val prices: Map<String, Double> = emptyMap()
 )
 
+data class User(
+    val surname: String = "",
+    val name: String = "",
+    val username: String = "",
+    val email: String = "",
+    val sexe : String = "",
+    val telephone : String ="",
+    val isMember: Boolean = false // Nouveau champ pour le statut d'adhésion
+)
+
 data class Coach(
     val id: String = "",
     val name: String = "",
