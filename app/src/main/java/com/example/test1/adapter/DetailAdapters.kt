@@ -11,6 +11,7 @@ import com.example.test1.R
 import com.example.test1.model.Coach
 import com.example.test1.model.Program
 
+
 class DisciplineAdapter(private val disciplines: List<String>) :
     RecyclerView.Adapter<DisciplineAdapter.DisciplineViewHolder>() {
 
@@ -31,8 +32,10 @@ class DisciplineAdapter(private val disciplines: List<String>) :
     override fun getItemCount(): Int = disciplines.size
 }
 
-class CoachAdapter(private val coaches: List<Coach>) :
-    RecyclerView.Adapter<CoachAdapter.CoachViewHolder>() {
+class CoachAdapter(
+    private val coaches: List<Coach>,
+    private val onCoachClick: (Coach) -> Unit = {}
+) : RecyclerView.Adapter<CoachAdapter.CoachViewHolder>() {
 
     class CoachViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textViewCoachName: TextView = itemView.findViewById(R.id.textViewCoachName)
@@ -51,6 +54,11 @@ class CoachAdapter(private val coaches: List<Coach>) :
         holder.textViewCoachName.text = coach.name
         holder.textViewCoachDiscipline.text = "Entraîneur de ${coach.discipline}"
         holder.textViewCoachBio.text = coach.bio
+
+        // Gérer le clic sur le coach
+        holder.itemView.setOnClickListener {
+            onCoachClick(coach)
+        }
     }
 
     override fun getItemCount(): Int = coaches.size
@@ -105,4 +113,3 @@ class PriceAdapter(private val prices: Map<String, Double>) :
 
     override fun getItemCount(): Int = priceList.size
 }
-

@@ -60,6 +60,13 @@
             android:theme="@style/Theme.test1"
             android:parentActivityName=".ClubDetailsActivity" />
 
+        <activity
+            android:name=".CoachBookingActivity"
+            android:exported="false"
+            android:label="Réserver un Coach"
+            android:theme="@style/Theme.test1"
+            android:parentActivityName=".ClubDetailsActivity" />
+
 
         <!--fin activities sport -->
 

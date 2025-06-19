@@ -1,9 +1,10 @@
 package com.example.test1
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
@@ -14,27 +15,30 @@ class MembershipActivity : AppCompatActivity() {
 
     private lateinit var buttonSubscribe: MaterialButton
     private lateinit var progressBarPayment: ProgressBar
+    private lateinit var textViewMembershipPrice: TextView // Nouveau TextView pour le prix
 
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
 
-    private lateinit var btnSubscribe: Button
-    private lateinit var userId: String
-    private lateinit var db: FirebaseFirestore
+    private var clubPrice: Double = 0.0 // Variable pour stocker le prix du club
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_membership)
 
+        clubPrice = intent.getDoubleExtra("club_price", 0.0) // Récupérer le prix du club
+
         initViews()
         setupAuth()
         setupClickListeners()
-        //setupToolbar()
+        setupToolbar()
+        displayClubPrice()
     }
 
     private fun initViews() {
         buttonSubscribe = findViewById(R.id.buttonSubscribe)
         progressBarPayment = findViewById(R.id.progressBarPayment)
+        textViewMembershipPrice = findViewById(R.id.textViewMembershipPrice) // Initialiser le TextView
     }
 
     private fun setupAuth() {
@@ -42,7 +46,7 @@ class MembershipActivity : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
     }
 
-    /*private fun setupToolbar() {
+    private fun setupToolbar() {
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -51,7 +55,15 @@ class MembershipActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
-    }*/
+    }
+
+    private fun displayClubPrice() {
+        if (clubPrice > 0) {
+            textViewMembershipPrice.text = "${clubPrice.toInt()}€" // Afficher le prix du club
+        } else {
+            textViewMembershipPrice.text = "Prix sur demande"
+        }
+    }
 
     private fun setupClickListeners() {
         buttonSubscribe.setOnClickListener {
@@ -69,39 +81,32 @@ class MembershipActivity : AppCompatActivity() {
         showLoading(true)
 
         // Simuler un processus de paiement
-        // Dans une vraie application, vous intégreriez ici un système de paiement comme Stripe, PayPal, etc.
         simulatePaymentProcess()
     }
 
     private fun simulatePaymentProcess() {
         // Simulation d'un délai de traitement de paiement
         buttonSubscribe.postDelayed({
-            // Simuler un paiement réussi (dans 90% des cas pour la démo)
-            val paymentSuccess = (1..10).random() <= 9
-
-            if (paymentSuccess) {
-                processSuccessfulPayment()
-            } else {
-                processFailedPayment()
-            }
+            processSuccessfulPayment()
         }, 2000) // Délai de 2 secondes pour simuler le traitement
     }
 
     private fun processSuccessfulPayment() {
         val currentUser = auth.currentUser ?: return
 
-        // Mettre à jour le statut d'adhésion dans Firestore
+        Log.d("MembershipActivity", "Tentative de mise à jour de isMember pour l'utilisateur: ${currentUser.uid}")
+
         firestore.collection("users").document(currentUser.uid)
             .update("isMember", true)
             .addOnSuccessListener {
+                Log.d("MembershipActivity", "Statut isMember mis à jour avec succès pour: ${currentUser.uid}")
                 showLoading(false)
                 showSuccessMessage()
-
-                // Retourner à l'activité précédente avec un résultat
                 setResult(RESULT_OK)
                 finish()
             }
             .addOnFailureListener { exception ->
+                Log.e("MembershipActivity", "Erreur lors de la mise à jour de isMember: ${exception.message}", exception)
                 showLoading(false)
                 Toast.makeText(
                     this,
@@ -111,21 +116,17 @@ class MembershipActivity : AppCompatActivity() {
             }
     }
 
-    private fun processFailedPayment() {
-        showLoading(false)
-        Toast.makeText(
-            this,
-            "Échec du paiement. Veuillez réessayer ou vérifier vos informations de paiement.",
-            Toast.LENGTH_LONG
-        ).show()
-    }
 
     private fun showSuccessMessage() {
         Toast.makeText(
             this,
-            "Félicitations ! Vous êtes maintenant membre . Profitez de tous les avantages !",
+            "Félicitations ! Vous êtes maintenant membre premium.",
             Toast.LENGTH_LONG
         ).show()
+    }
+
+    private fun processFailedPayment() {
+        // Cette fonction n'est plus utilisée car le paiement est toujours simulé comme réussi
     }
 
     private fun showLoading(show: Boolean) {
@@ -135,8 +136,7 @@ class MembershipActivity : AppCompatActivity() {
         if (show) {
             buttonSubscribe.text = "Traitement en cours..."
         } else {
-            buttonSubscribe.text = "Devenir Membre "
+            buttonSubscribe.text = "Devenir Membre Premium"
         }
     }
 }
-

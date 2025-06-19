@@ -23,6 +23,10 @@
     <color name="text_primary">#212121</color>
     <color name="text_secondary">#757575</color>
 
+    <!-- Couleur pour les bordures -->
+    <color name="border_color">#E0E0E0</color>
+    <!-- Couleur pour les créneaux sélectionnés -->
+    <color name="time_slot_selected">#E3F2FD</color>
     <!-- Couleurs pour la navigation -->
     <color name="bottom_nav_color">@color/primary_color</color>
 

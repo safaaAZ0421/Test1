@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -23,7 +22,6 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.firestore.FirebaseFirestore
 
-
 class ClubDetailsActivity : AppCompatActivity() {
 
     private lateinit var viewPagerPhotos: ViewPager2
@@ -35,7 +33,6 @@ class ClubDetailsActivity : AppCompatActivity() {
     private lateinit var recyclerViewPrograms: RecyclerView
     private lateinit var recyclerViewPrices: RecyclerView
     private lateinit var buttonJoinClub: MaterialButton
-
 
     private lateinit var firestore: FirebaseFirestore
     private var clubId: String? = null
@@ -70,16 +67,15 @@ class ClubDetailsActivity : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
     }
 
-   private fun setupToolbar() {
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+    private fun setupToolbar() {
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         toolbar.setNavigationOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
+            onBackPressed()
         }
-   }
-
+    }
 
     private fun setupRecyclerViews() {
         // Configuration des RecyclerViews
@@ -96,10 +92,7 @@ class ClubDetailsActivity : AppCompatActivity() {
         }
     }
 
-
-
     private fun loadClubDetails() {
-
         clubId?.let { id ->
             firestore.collection("clubs").document(id)
                 .get()
@@ -142,16 +135,29 @@ class ClubDetailsActivity : AppCompatActivity() {
         }
     }
 
-
-
-   private fun setupDisciplinesAdapter(disciplines: List<String>) {
+    private fun setupDisciplinesAdapter(disciplines: List<String>) {
         val adapter = DisciplineAdapter(disciplines)
         recyclerViewDisciplines.adapter = adapter
     }
 
     private fun setupCoachesAdapter(coaches: List<Coach>) {
-        val adapter = CoachAdapter(coaches)
+        val adapter = CoachAdapter(coaches) { coach ->
+            if (isUserMember) {
+                // L'utilisateur est membre, permettre la réservation
+                openCoachBooking(coach)
+            } else {
+                // L'utilisateur n'est pas membre, demander de devenir membre
+                Toast.makeText(this, "Veuillez devenir membre pour réserver un coach", Toast.LENGTH_LONG).show()
+            }
+        }
         recyclerViewCoaches.adapter = adapter
+    }
+
+    private fun openCoachBooking(coach: Coach) {
+        val intent = Intent(this, CoachBookingActivity::class.java)
+        intent.putExtra("coach_id", coach.id)
+        intent.putExtra("club_id", clubId)
+        startActivity(intent)
     }
 
     private fun setupProgramsAdapter(programs: List<Program>) {
@@ -163,6 +169,7 @@ class ClubDetailsActivity : AppCompatActivity() {
         val adapter = PriceAdapter(prices)
         recyclerViewPrices.adapter = adapter
     }
+
     private fun updateUIBasedOnMembership() {
         if (isUserMember) {
             buttonJoinClub.text = "Réserver un coach" // Ou autre texte pour les membres
@@ -175,14 +182,17 @@ class ClubDetailsActivity : AppCompatActivity() {
 
     private fun handleJoinClub() {
         if (isUserMember) {
-            // L'utilisateur est membre, permettre la réservation
-            Toast.makeText(this, "Fonctionnalité de réservation de coach à venir", Toast.LENGTH_SHORT).show()
+            // L'utilisateur est membre, afficher un message d'information
+            Toast.makeText(this, "Cliquez sur un coach pour réserver une séance", Toast.LENGTH_SHORT).show()
         } else {
             // L'utilisateur n'est pas membre, lancer l'activité d'adhésion
             val intent = Intent(this, MembershipActivity::class.java)
+            val minPrice = currentClub?.prices?.values?.minOrNull()
+            minPrice?.let { intent.putExtra("club_price", it) }
             startActivityForResult(intent, MEMBERSHIP_REQUEST_CODE)
         }
     }
+
     companion object {
         private const val MEMBERSHIP_REQUEST_CODE = 1001
     }
@@ -198,9 +208,9 @@ class ClubDetailsActivity : AppCompatActivity() {
         }
     }
 
-
     private fun showError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 }
+
 

@@ -2,7 +2,6 @@ package com.example.test1
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -15,7 +14,6 @@ import com.example.test1.model.Club
 import com.example.test1.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-
 
 
 class SportsActivity : AppCompatActivity() {
@@ -35,8 +33,12 @@ class SportsActivity : AppCompatActivity() {
 
         initViews()
         setupRecyclerView()
-        //loadClubs()
-        checkMembershipAndLoadClubs()
+        // Removed loadClubs() from here, it will be called by checkMembershipAndLoadClubs() in onResume
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkMembershipAndLoadClubs() // Call this here to ensure status is always fresh
     }
 
     private fun initViews() {
@@ -58,12 +60,11 @@ class SportsActivity : AppCompatActivity() {
         }
     }
 
-
     private fun checkMembershipAndLoadClubs() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
             firestore.collection("users").document(currentUser.uid)
-                .get()
+                .get(com.google.firebase.firestore.Source.SERVER)
                 .addOnSuccessListener { document ->
                     val user = document.toObject(User::class.java)
                     isUserMember = user?.isMember ?: false
@@ -79,6 +80,7 @@ class SportsActivity : AppCompatActivity() {
             loadClubs()
         }
     }
+
     private fun loadClubs() {
         showLoading(true)
 
@@ -109,7 +111,6 @@ class SportsActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 showLoading(false)
                 showEmptyState(true)
-                Log.e("SportsActivity", "Erreur lors du chargement des clubs: ", exception)
                 Toast.makeText(this, "Erreur lors du chargement des clubs: ${exception.message}", Toast.LENGTH_LONG).show()
             }
     }

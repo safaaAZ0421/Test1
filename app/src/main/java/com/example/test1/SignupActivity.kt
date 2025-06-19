@@ -1,21 +1,23 @@
 package com.example.test1
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import android.widget.Spinner
-import android.widget.ArrayAdapter
-import android.content.Intent
-import android.util.Log
+
 
 class SignupActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +62,8 @@ class SignupActivity : AppCompatActivity() {
                             "username" to username,
                             "sexe" to sexe,
                             "telephone" to telephone,
-                            "email" to email
+                            "email" to email,
+                            "isMember" to false
                         )
 
                         Log.d("FIREBASE_DEBUG", "Données prêtes pour Firestore:\n${userMap.entries.joinToString("\n") { "${it.key}=${it.value}" }}")

@@ -27,7 +27,9 @@ data class Coach(
     val name: String = "",
     val discipline: String = "",
     val bio: String = "",
+    val hourlyRate: Double = 0.0,
     val photoUrl: String = ""
+
 )
 
 data class Program(
