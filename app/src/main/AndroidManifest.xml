@@ -11,6 +11,7 @@
     <!--demander l'autorisation d'accéder aux fichiers de stockage externe -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -23,22 +24,40 @@
         
 
         tools:targetApi="31">
+        <!-- activities beauty -->
+        <activity
+            android:name=".activities.SalonListActivity"
+            android:exported="true"
+            android:label="@string/salons_beaute" />
 
-        <!-- Activité de création de compte -->
+        <activity
+            android:name=".activities.SalonDetailActivity"
+            android:exported="false"
+            android:label="@string/details_salon"
+            android:parentActivityName=".activities.SalonListActivity" />
+
+        <activity
+            android:name=".activities.AppointmentActivity"
+            android:exported="false"
+            android:label="@string/rendez_vous"
+            android:parentActivityName=".activities.SalonDetailActivity" />
+        <!--  fin activities santé -->
+
+        <!-- Activity de création de compte -->
 
         <activity android:name=".SignupActivity" />
 
-        <!-- Activité de connexion -->
+        <!-- Activity de connexion -->
         <activity android:name=".LoginActivity" />
 
         <!-- Activité principale de l'application après connexion -->
         <activity android:name=".HomeActivity" />
 
-             <!-- activities santé -->
+        <!-- activities santé -->
         <activity android:name=".CabinetDetailsActivity" />
         <activity android:name=".CabinetListActivity"/>
 
-  <!--  fin activities santé -->
+        <!--  fin activities santé -->
         <!--activities sport -->
         <activity
             android:name=".SportsActivity"

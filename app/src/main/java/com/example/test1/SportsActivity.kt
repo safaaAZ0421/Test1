@@ -2,6 +2,7 @@ package com.example.test1
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -68,15 +69,32 @@ class SportsActivity : AppCompatActivity() {
                 .addOnSuccessListener { document ->
                     val user = document.toObject(User::class.java)
                     isUserMember = user?.isMember ?: false
+
+                    Log.d(
+                        "SportsActivity",
+                        "Statut isMember lu pour ${currentUser.uid}: $isUserMember"
+                    )
+
                     loadClubs()
                 }
                 .addOnFailureListener { exception ->
-                    Toast.makeText(this, "Erreur de chargement du statut d'adhésion: ${exception.message}", Toast.LENGTH_LONG).show()
-                    isUserMember = false // Par défaut, non membre en cas d'erreur
+                    Log.e(
+                        "SportsActivity",
+                        "Erreur de chargement du statut d'adhésion: ${exception.message}",
+                        exception
+                    )
+                    Toast.makeText(
+                        this,
+                        "Erreur de chargement du statut d'adhésion: ${exception.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                    isUserMember = false // Par défaut : non membre
                     loadClubs()
                 }
         } else {
-            isUserMember = false // Utilisateur non connecté, donc non membre
+            isUserMember = false // Utilisateur non connecté
+            Log.d("SportsActivity", "Utilisateur non connecté. isUserMember: $isUserMember")
             loadClubs()
         }
     }

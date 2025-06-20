@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.test1.activities.SalonListActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -115,6 +116,8 @@ class HomeActivity : AppCompatActivity() {
             btn.setOnClickListener {
                 when (service) {
                     //affichier la liste des services
+                    "Beauté" -> {
+                        startActivity(Intent(this, SalonListActivity::class.java))}
                     //pour sport
                     "Sport" -> {
                         startActivity(Intent(this, SportsActivity::class.java))}

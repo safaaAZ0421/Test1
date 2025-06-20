@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="app_name" translatable="false">Beauty App</string>
+    <string name="salons_beaute" translatable="false">Salons de Beauté</string>
+    <string name="details_salon" translatable="false">Détails du Salon</string>
+    <string name="rendez_vous" translatable="false">Rendez-vous</string>
+    <string name="reserver" translatable="false">Prendre rendez-vous</string>
+    <string name="annuler_rendez_vous" translatable="false">Annuler Rendez-vous</string>
+    <string name="choisir_date" translatable="false">Choisir une date</string>
+    <string name="choisir_heure" translatable="false">Choisir une heure</string>
+    <string name="confirmer_rendez_vous" translatable="false">Confirmer le rendez-vous</string>
+    <string name="date_non_selectionnee" translatable="false">Date: Non sélectionnée</string>
+    <string name="heure_non_selectionnee" translatable="false">Heure: Non sélectionnée</string>
+    <string name="prix_moyen" translatable="false">Prix moyen: %1$s€</string>
+    <string name="rendez_vous_confirme" translatable="false">Rendez-vous confirmé!</string>
+    <string name="rendez_vous_annule" translatable="false">Rendez-vous annulé</string>
+    <string name="erreur_rendez_vous" translatable="false">Erreur lors de la prise de rendez-vous</string>
+    <string name="erreur_annulation" translatable="false">Erreur lors de l\'annulation</string>
+    <string name="choisir_date_heure" translatable="false">Veuillez choisir une date et une heure</string>
+    <!-- beauty fin -->
     <string name="btn_afficher_infos" translatable="false">Afficher mes informations</string>
     <string name="btn_save" translatable="false">Enregistrer les modifications</string>
     <string name="btn_devenir_prestataire" translatable="false">Devenir prestataire</string>
@@ -36,5 +53,6 @@
     <string name="from_price" translatable="false">À partir de</string>
     <string name="per_month" translatable="false">/mois</string>
     <string name="price_on_request" translatable="false">Prix sur demande</string>
+
 </resources>
 
